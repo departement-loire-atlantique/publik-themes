@@ -9,7 +9,7 @@ data_uris:
 
 css: export LC_ALL=C.UTF-8
 css: data_uris
-	cd static/loireatlantique/ && sass style.scss:style.css
+	cd static/loireatlantique/ && sassc style.scss style.css
 	rm -rf static/*/.sass-cache/
 
 clean:
