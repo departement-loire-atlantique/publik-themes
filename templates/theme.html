@@ -82,7 +82,7 @@
   {% endblock %}
 
     <div id="main-content-wrapper">
-        <div id="main-content">
+        <div id="main-content" class="clearfix">
 
             {% block messages %}
             {% if messages %}
@@ -105,8 +105,6 @@
             </div> <!-- #content -->
             
             {% block content-post %}{% endblock %}
-
-            <br class="clear"/>
 
         </div> <!-- #main-content -->
     </div> <!-- #main-content-wrapper -->
