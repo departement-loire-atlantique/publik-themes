@@ -237,6 +237,10 @@ div.error {
     }
 }
 
+button.cell-items-pagination-prev:disabled, button.cell-items-pagination-next:disabled {
+	background-color: #BBBBBB;
+}
+
 div.buttons.submit {
     div.submit-button {
         float: right;
