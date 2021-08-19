@@ -12,7 +12,7 @@ make install
 
 ## After each change
 ```
-make dist
+make clean && make install
 ```
 
 ## How to update the publik-base-theme submodule
