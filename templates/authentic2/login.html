@@ -25,6 +25,19 @@
         {% endif %}
     {% endfor %}
 
+    {# Bouton connexion agent #}
+    {% for name, content in methods %}
+    <div id="bouton-connexion-agent" style="display: block; height: 35px; background-color: white; color: black; border: solid 1px black;">
+        {% if methods|length == 1 %}
+        <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
+        {% endif %}
+        {% if name == "OpenIDConnect" %}
+        <div>
+            {{ content|safe }}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
 
     {# Bloc FranceConnect #}
     {% for name, content in methods %}
@@ -61,20 +74,6 @@
     <p>Pour exercer ces droits ou pour toute question relative au traitement de vos données dans ce dispositif, vous pouvez contacter notre délégué à la protection des données à l’adresse suivante : Département de Loire-Atlantique, Délégué à la protection des données, Direction juridique, 3 quai ceineray, CS 94109, 44041 Nantes Cedex 1.</p>
 
 </div>
-
-{# Bouton connexion agent #}
-{% for name, content in methods %}
-<div id="bouton-connexion-agent">
-    {% if methods|length == 1 %}
-    <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
-    {% endif %}
-    {% if name == "OpenIDConnect" %}
-    <div>
-        {{ content|safe }}
-    </div>
-    {% endif %}
-</div>
-{% endfor %}
 
 <script>
     $("#oidc-a-keycloak-agents").addClass("button");
