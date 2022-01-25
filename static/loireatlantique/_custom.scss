@@ -395,6 +395,11 @@ ul#id_title {
     div.hint p, div.hint ul, div.hint li, div.hint span {
         font-size: 14px !important;
     }
+
+    div.rouge label.field--label {
+        color: red;
+    }
+
 }
 
 #content p {
