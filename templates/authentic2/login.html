@@ -27,7 +27,7 @@
 
     {# Bouton connexion agent #}
     {% for name, content in methods %}
-    <div id="bouton-connexion-agent" style="display: block; height: 35px; background-color: white; color: black; border: solid 1px black;">
+    <div id="bouton-connexion-agent">
         {% if methods|length == 1 %}
         <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
         {% endif %}
