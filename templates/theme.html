@@ -65,13 +65,10 @@
             </a>
         </h1>
 
-      {% if include_top_links != False %}
-        <div id="toplinks">
-          {% block user-info %}
-          {% endblock %}
-          <a class="mes-demarches" href="{{ portal_user_url }}">Mes démarches</a>
-        </div> <!-- toplinks -->
-      {% endif %}
+        {% block top-links %}
+        {% endblock %}
+        <a class="mes-demarches" href="{{ portal_user_url }}">Mes démarches</a>
+
      </div>
      {% block header-bottom %}{% endblock %}
     </div> <!-- header -->
