@@ -2,10 +2,10 @@
 {% load gadjo i18n static %}
 <html {% if LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}"{% endif %} {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
   <head>
-    <meta charset="UTF-8"><!-- ☭ -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8"><!-- 🔥 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% firstof global_title "Compte Citoyen" %} {% block title %}{% endblock %}</title>
+    <title>{% firstof global_title site_title "Compte Citoyen" %} {% block title %}{% endblock %}</title>
     {% if meta_robots %}
     <meta name="robots" content="{{ meta_robots }}" />
     {% elif environment_label %}
@@ -14,217 +14,232 @@
     {% if meta_description %}
     <meta name="description" content="{{ meta_description }}" />
     {% endif %}
-    {% if favicon %}
-    <link rel="shortcut icon" href="{{site_base}}{% static "" %}{{favicon}}" />
+    {% now "Y" as current_year %}
+    <meta name="copyright" content="Copyright © 2019-{{ current_year }} Département de Loire-Atlantique" />
+    {% if meta_keywords %}
+    <meta name="keywords" content="{{ meta_keywords }}" />
     {% endif %}
+    {% block meta_icons %}{% endblock %}
     {% if theme_color %}
     <meta name="theme-color" content="{{theme_color}}">
     <meta name="msapplication-navbutton-color" content="{{theme_color}}">
     {% endif %}
-    {% if pwa_display == "standalone" or pwa_display == "fullscreen" %}
+    <meta name="apple-mobile-web-app-title" content="{{ pwa_settings.get_application_name }}">
     <link rel="manifest" href="{{site_base}}/manifest.json">
+    {% if pwa_display == "standalone" %}
+    <meta name="apple-mobile-web-app-capable" content="yes">
     {% endif %}
     {% block extra_top_head %}
     {% endblock %}
     {{ media }}
+    {% block css-variant %}
     {% if css_variant %}
-      <link rel="stylesheet" type="text/css" href="{{site_base}}{% static "" %}{{css_variant}}/style.css?{{statics_hash}}">
+      <link rel="stylesheet" type="text/css" href="{{site_base}}{% static "" %}{{css_variant}}/style.css?{% start_timestamp %}">
     {% else %}
-      <link rel="stylesheet" type="text/css" href="{{site_base}}{% static "style.css" %}?{{statics_hash}}">
+      <link rel="stylesheet" type="text/css" href="{{site_base}}{% static "style.css" %}?{% start_timestamp %}">
     {% endif %}
+    {% endblock %}
     {% block extra_css %}
     {% endblock %}
     {% block extra_scripts %}
     {% endblock %}
-    <link rel="stylesheet" href="{{site_base}}/static/xstatic/jquery-ui.css" />
-    <script src="{{site_base}}/static/xstatic/jquery-ui.js"></script>
   </head>
   <body {% block bodyargs %}class="{% block bodyclasses %}{% endblock %}" {% block bodyattrs %}{% endblock %}{% endblock %}>
    <div id="nav-skip">
-    <div>
-     <a href="#main-content">Aller au contenu</a>
-     <a href="#nav">Aller au menu</a>
-    </div>
+    <ul>
+     <li><a href="#main-content">Aller au contenu</a></li>
+     <li><a href="#nav">Aller au menu</a></li>
+    </ul>
    </div>
 
    <div id="page" {% block page-args %}{% endblock %}>
-    <header>
+    <header role="banner" class="site-header">
     <div id="header-wrapper" >
+    {% block header-pre %}{% endblock %}
     <div id="header">
      {% block header-top %}{% endblock %}
      <div id="top">
-
-        <a href="https://www.loire-atlantique.fr/">
-            <div id="bandeau">
-                <img alt="Département de Loire-Atlantique" title="Département de Loire-Atlantique" src="https://www.loire-atlantique.fr/s.gif">
-            </div>
-        </a>
         <h1 id="logo-demarches">
-            <a href="{% if portal_user_url %}{{ portal_user_url }}{% else %}/{% endif %}">
-                <img src="{{ portal_user_url }}/static/loireatlantique/images/demarches-logo.png" alt="Retour à l'accueil du site {{ site_title }}" title="Retour à l'accueil du site {{ site_title }}" >
-            </a>
-        </h1>
+          <a accesskey="1" href="{% if portal_user_url %}{{ portal_user_url }}{% else %}/{% endif %}">
+            <img src="{{ portal_user_url }}/static/loireatlantique/images/logo-demarches-loire-atlantique.svg"
+                alt="Retour à l'accueil du site {{ site_title }}"
+                title="Retour à l'accueil du site {{ site_title }}">
+          </a>
+      </h1>
 
-        {% block top-links %}
-        {% endblock %}
-
+       {% block header-content %}
+         {% block top-links %}
+         {% endblock %}
+       {% endblock %}
      </div>
      {% block header-bottom %}{% endblock %}
     </div> <!-- header -->
+    {% block header-post %}{% endblock %}
     </div> <!-- header-wrapper -->
     </header>
+
+  {% block after-header %}
+    {% block nav %}
+    {% endblock %}
+  {% endblock %}
 
   {% block before-main-content %}
   {% endblock %}
 
-    <div id="main-content-wrapper">
-        <div id="main-content" class="clearfix">
+  <main role="main">
+  <div id="main-content-wrapper">
+    <div id="main-content">
 
-            {% block messages %}
-            {% if messages %}
-            <div id="messages" class="messages-login">
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
+{% block content-messages %}
+{% block messages %}
+{% if messages %}
+  <div id="messages" class="messages-login">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+{% endblock %}
+{% endblock %}
+
+    {% block content-pre %}{% endblock %}
+    <div id="content" class="gru-content">
+            {% block content-top %}{% endblock %}
+            {% block content %}
             {% endblock %}
+            {% block content-bottom %}{% endblock %}
+    </div> <!-- #content -->
+    {% block content-post %}{% endblock %}
 
-            {% block content-pre %}{% endblock %}
-            <div id="content" class="gru-content large">
-                    {% block content-top %}{% endblock %}
-                    {% block content %}
-                    {% endblock %}
-                    {% block content-bottom %}{% endblock %}
-            </div> <!-- #content -->
-            
-            {% block content-post %}{% endblock %}
-
-        </div> <!-- #main-content -->
+    </div> <!-- #main-content -->
     </div> <!-- #main-content-wrapper -->
+   </main>
 
-    <footer>
-        {% block footer-top %}{% endblock %}
-        <div id="footer-wrapper">
-            <div id="footer">
-                <div id="footer-links" class="grid-10-12">
-                    <ul>
-                        <li><a href="https://www.loire-atlantique.fr/contact">Nous contacter</a></li>
-                        <li><a href="{{ portal_user_url }}mentions-legales">Mentions légales</a></li>
-                    </ul>
-                </div>
-                <div id="logo-loire-atlantique" class="grid-2-12">
-                    <a href="{{ logo_link_url|default:'/' }}">
-                        <img src="{{ portal_user_url }}/static/loireatlantique/images/pied-logo.png" alt="Accès au site du Département de Loire-Atlantique" title="Accès au site du Département de Loire-Atlantique">
-                    </a>
-                </div>
-            {% block footer %}
-            <p id="legal">Copyright © 2020 Département de Loire-Atlantique</p>
-            {% endblock %}
-            </div>
-        </div>
-        {% block footer-bottom %}{% endblock %}
-    </footer>
-
+   <footer role="contentinfo">
+    {% block footer-pre %}{% endblock %}
+    <div id="footer-wrapper">
+    <div id="footer" class="clearfix">
+      {% block footer-top %}{% endblock %}
+      <div id="footer-links" class="grid-10-12">
+        <ul>
+            <li><a href="https://www.loire-atlantique.fr/contact">Nous contacter</a></li>
+            <li><a href="{{ portal_user_url }}mentions-legales">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div id="logo-loire-atlantique" class="grid-2-12">
+          <a href="{{ logo_link_url|default:'/' }}">
+              <img src="{{ portal_user_url }}/static/loireatlantique/images/pied-logo.png"
+                  alt="Accès au site du Département de Loire-Atlantique"
+                  title="Accès au site du Département de Loire-Atlantique">
+          </a>
+      </div>
+      {% block footer %}
+      {% endblock %}
+      {% block footer-bottom %}
+          {% block back-top %}
+          {% endblock %}
+      {% endblock %}
+    </div>
+    </div>
+    {% block footer-post %}{% endblock %}
+   </footer>
    </div> <!-- #page -->
 
     <!-- javascript pour "patcher" certains choix d'Entrouvert non désirés -->
 
     <script>
 
-        $(function() {
+      $(function() {
 
-            // désactication des champs dans le formulaire récapitulatif de la saisie
-            $('div.form-validation form div.page :input').attr('readonly', 'true');
+          // désactication des champs dans le formulaire récapitulatif de la saisie
+          $('div.form-validation form div.page :input').attr('readonly', 'true');
 
-            // tous les liens dans les formulaires doivent s'ouvrir dans une nouvelle page
-            $('form .comment-field a').each(function() {
-                $(this).attr("target","_blank");
-            });
+          // tous les liens dans les formulaires doivent s'ouvrir dans une nouvelle page
+          $('form .comment-field a').each(function() {
+              $(this).attr("target","_blank");
+          });
 
-            // modales
+          // modales
 
-            $("#dp44-modal-opener-1").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-1").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-2").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-2").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-3").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-3").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-4").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-4").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-5").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-5").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-6").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-6").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-7").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-7").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-8").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-8").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-9").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-9").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-            $("#dp44-modal-opener-10").click(function() {
-                $(".dp44-modal").dialog({
-                    minWidth: 450
-                  });
-                return false;
-            });
+          $("#dp44-modal-opener-10").click(function() {
+              $(".dp44-modal").dialog({
+                  minWidth: 450
+                });
+              return false;
+          });
 
-        });
+      });
 
-    </script>
+  </script>
 
    {% if environment_label %}<span id="environment-label">{{ environment_label }}</span>{% endif %}
-   <a style="display: none" href="#" accesskey="t">Retour en haut de page</a>
    {% include "includes/tracking.html" %}
    {% block body-bottom %}
    {% endblock %}
-
   </body>
 </html>

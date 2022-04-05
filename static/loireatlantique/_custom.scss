@@ -2,11 +2,19 @@
 //                 ENTETE DE PAGE
 // -----------------------------------------------------
 
+nav {
+    display: none;
+}
+
 #header-wrapper {
-    background-color: #dcdadb;
-    box-shadow: 0 2px 2px #cec9c2;
     height: 28px;
     margin-bottom: 90px;
+}
+
+#header {
+    @media (max-width: $mobile-limit) {
+        margin-top: 5em !important;
+    }
 }
 
 #rub_service  {
@@ -21,31 +29,32 @@ a:hover {
 
 // Liens de connexion / vos démarches / déconnexion
 #toplinks {
+    background: black;
+    padding: 0.8em;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
     .logged-in {
-        .connected-user, .mes-demarches, .logout {
-            padding-left: 1ex;
-            padding-right: 1ex;
-        }
-        a:first-child {
-            color: #808080;
+        a:first-child::after {
             content: "|";
         }
-        a:first-child::before {
-            content: "";
-         }
+        .logout {
+            margin-left: 0.7em;
+        }
     }
+    a {
+        color: white !important;
+    }
+
     @media (max-width: $mobile-limit) {
-        text-align: left !important;
-        padding-right: 0 !important;
-        width: 100% !important;
-        top: 35px !important;
+        top: -5em;
     }
 }
 
 // Bouton "Portail agent" décalé en bas à droite
 a#publik-portal-agent {
     color: black;
-    background: #b2cb00;
+    background: $green-color;
     border: 1px solid grey;
     top: 33px;
 }
@@ -66,18 +75,27 @@ div.to-the-right {
 #logo-demarches {
     margin-top: 20px !important;
     img {
-        display: block;
-        margin-bottom: 5px;
-        max-width: 100%;
+        height: 3em;
     }
     @media (max-width: $mobile-limit) {
         padding-left: 0 !important;
-        background-position: 0 !important;
-        padding-top: 20px !important;
     }
 }
 
 // Portail usager
+
+html {
+    color: black !important;
+}
+
+html, button {
+    font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.gru-content div.a2-block h2 {
+    font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    border-bottom: 1px solid #ccc !important;
+}
 
 #content {
 
@@ -87,6 +105,10 @@ div.to-the-right {
 
     div.cell a, a.button, a.form-title, div.back-home-button a {
         text-decoration: none;
+    }
+
+    div.cell a:hover, a.button:hover, a.form-title:hover, div.back-home-button a:hover {
+        text-decoration: underline;
     }
 
     #sidebar {
@@ -102,7 +124,6 @@ div.to-the-right {
 
     #panneau-code-suivi, #tracking-code {
     
-        border: solid 2px $green-color !important;
         padding: 10px;
     
         a {
@@ -121,15 +142,15 @@ div.to-the-right {
     
         .wcs-tracking-code-input h2:first-of-type, h3:first-of-type {
             background-color: $grey-color !important;
-            font-family: 'WinterthurCondensed', sans-serif !important;
-            border-bottom: dotted 2px #000 !important;
+            font-family: 'Blogger Sans', sans-serif !important;
+            border-bottom: 1px solid #ccc !important;
             font-size: 28px !important;
         }
 
         button {
             margin-right: 0 !important;
             height: 3em;
-            padding: 5px;
+            padding: 10px;
         }
     
         form {
@@ -168,9 +189,9 @@ div.to-the-right {
 }
 
 h1.maintitle, h1.form-content--title {
-    font-family: 'WinterthurCondensed', sans-serif;
+    font-family: 'Blogger Sans', sans-serif !important;
     font-size: 35px;
-    border-bottom: dotted 2px #000 !important;
+    border-bottom: solid 1px #ccc !important;
 }
 
 div.error {
@@ -209,10 +230,9 @@ div.error {
 .demarches-brouillon, .demarches-encours, .demarches-terminees {
     border: solid 2px $green-color !important;
     h2 {
-        font-family: 'WinterthurCondensed' !important;
+        font-family: 'Blogger Sans', sans-serif !important;
         font-size: 28px !important;
         border-bottom: 0 !important;
-        border: 2px solid $green-color !important;
         border-bottom: 2px solid $green-color !important;
         background-size: 30px !important;
         background-repeat: no-repeat !important;
@@ -269,31 +289,34 @@ div.buttons.submit {
 
 #login-page {
 
-    background-color: $grey-color;
+    background-color: $green-color;
     
     .connexion-title {
         padding: 20px;
         img { height: 30px; }
         h1 {
             display: block;
-            font-family: 'WinterthurCondensed', sans-serif;
+            font-family: 'Blogger Sans', sans-serif !important;
             font-size: 32px;
             font-weight: normal;
             margin: 7px;
             padding-bottom: 10px;
-            border-bottom: 2px dotted black;
+            border-bottom: 1px solid #ccc;
         }
     }
-
+    
     .block.connexion.motdepasse {
+        h2 {
+            display: none; // masquage du titre "Connexion" redondant
+        }
         .or {
-            width: 1em;
+            width: 30px;
             position: relative;
             top: -160px;
             left: 280px;
             border-radius: 50%;
-            padding: 5px !important;
-            background-color: $grey-color;
+            padding: 7px !important;
+            background-color: $green-color;
             border: solid 1px grey;
             @media (max-width: 1000px) {
                 display: none;
@@ -302,7 +325,7 @@ div.buttons.submit {
     }
 
     div.block.connexion {
-        background-color: $grey-color;
+        background-color: $green-color;
         padding: 10px;
         margin: 1em !important;
         min-height: 320px;
@@ -328,6 +351,10 @@ div.buttons.submit {
         }
     }
 
+    button.submit-button:hover {
+        text-decoration: underline !important;
+    }
+
     button.cancel-button {
         display: none;
     }
@@ -344,6 +371,10 @@ div.buttons.submit {
                 cursor: pointer;
                 border: 1px solid transparent;
                 box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.21);
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
             }
         }
 
@@ -368,7 +399,8 @@ div.buttons.submit {
 #login-page-encart {
     padding: 10px;
     margin-top: 30px;
-    border: solid 2px $green-color !important;
+    margin-bottom: 30px;
+    border: solid 1px $green-color !important;
 }
 
 // Création d'un compte
@@ -376,6 +408,12 @@ div.buttons.submit {
 
 ul#id_title {
     list-style: none;
+}
+
+#registration-blocks h2 {
+    font-size: 1.4rem;
+    font-family: "Blogger Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-bottom: 1px solid #ccc;
 }
 
 // -----------------------------------------------------
@@ -388,6 +426,18 @@ ul#id_title {
     }
 }
 
+// Champs input
+// Style CSS désactivé, car imppossible de recoder les styles des cases à cocher et boutons radio
+// dans le socle Publik, car les champs n'ont pas de balise 'label', or le design system en a besoin :
+// "Pour des questions de design, les cases à cocher et boutons radios ont été refaits via CSS. 
+// Ce qui impose une façon de coder : les inputs checkbox ou radio doivent obligatoirement être 
+// codés à gauche du label dans le HTML, sans aucune balise entre les deux."
+// cf https://design.loire-atlantique.fr/components/form.html
+// input, textarea,  {
+//     border: 1px solid $dark-grey-color;
+//     border-radius: 3px;
+// }
+
 #rub_service {
     p, label, input {
         font-size: 15px;
@@ -398,6 +448,10 @@ ul#id_title {
 
     div.rouge label.field--label {
         color: red;
+    }
+
+    div.file-upload-widget div.file-button div.widget-message.upload-done::after {
+        color: green;
     }
 
 }
@@ -429,10 +483,6 @@ ul#evolutions li:after {
 
 ul#evolutions div.evolution-metadata {
 	text-transform: uppercase;
-	color: #384981;
-	span.status {
-		font-weight: normal;
-	}
 }
 
 #evolutions .msg-system {
@@ -447,6 +497,20 @@ ul#evolutions span.time {
 ul#evolutions span.user {
     display: block;
     opacity: 1;
+}
+
+// Etapes
+
+.wcs-step {
+    margin-bottom: 0;
+}
+
+.wcs-step.current {
+    background-color: $green-color;
+}
+
+.wcs-step.current .wcs-step--marker, .wcs-step.current .wcs-step--label {
+    color: black
 }
 
 // Boutons
@@ -522,13 +586,13 @@ div#rub_service {
 
     h2:first-of-type {
         text-align: left;
-        font-family: 'WinterthurCondensed';
+        font-family: 'Blogger Sans';
         font-size: 32px !important;
         font-weight: 400;
         padding: 0 0 0.5ex 0;
         margin-bottom: 20px;
         background: none;
-        border-bottom: 2px dotted black;
+        border-bottom: 1px solid #ccc;
         border-top: 0;
     }
 
@@ -557,7 +621,7 @@ div#rub_service {
     font-size: 20px;
     padding-top: 1.5rem;
     margin-top: 1.5rem;
-    border-top: dotted 2px black !important;
+    border-top: 1px solid #ccc !important;
 }
 
 #rub_service form h3:first-of-type {
@@ -617,6 +681,10 @@ div.section.foldable span.disclose-message {
     }
 }
 
+.infonotice, .pk-information, .pk-information.cell, #messages {
+    background-color: $green-color;
+}
+
 // POUR CACHER DES ELEMENTS
 .cd44-hidden {
     display: none;
@@ -673,29 +741,24 @@ footer {
     // fond du pied de page
     font-family: $font-family;
     font-size: 12px;
-    background: #dcdadb;
+    background: #e6e6e6;
+    margin-top: 2ex;
 
     // par défaut le wrapper une couleur de fond gris sombre
     #footer-wrapper {
         background: none;
+        //padding: 0;
     }
-
 
     // Liens
     // -----------------------------------------------------
-    
-    // bordure grise et logotype "Un service du Département"
-    #footer-links {
-        padding: 0 0 10px 0;
-        border-bottom: 7px solid #cec9c2;
-        background-image: url('images/un_service_du_depla.png');
-        background-repeat: no-repeat;
-        background-position: right 0 top 1em;
-    }
 
     #logo-loire-atlantique {
         text-align: right;
         padding-right: 0;
+        @media (max-width: $mobile-limit) {
+            padding: 3ex 3ex 0 0 !important;
+        }
     }
 
     ul {
