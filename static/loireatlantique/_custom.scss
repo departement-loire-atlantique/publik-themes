@@ -11,6 +11,12 @@ nav {
     margin-bottom: 90px;
 }
 
+#header {
+    @media (max-width: $mobile-limit) {
+        margin-top: 5em !important;
+    }
+}
+
 #rub_service  {
     a {
         text-decoration: underline;
@@ -24,8 +30,10 @@ a:hover {
 // Liens de connexion / vos démarches / déconnexion
 #toplinks {
     background: black;
-    height: 2.5em;
+    padding: 0.8em;
     border-radius: 0;
+    border: 0;
+    box-shadow: none;
     .logged-in {
         a:first-child::after {
             content: "|";
@@ -37,25 +45,10 @@ a:hover {
     a {
         color: white !important;
     }
-    // .logged-in {
-    //     .connected-user, .mes-demarches, .logout {
-    //         padding-left: 1ex;
-    //         padding-right: 1ex;
-    //     }
-    //     a:first-child {
-    //         color: #808080;
-    //         content: "|";
-    //     }
-    //     a:first-child::before {
-    //         content: "";
-    //      }
-    // }
-    // @media (max-width: $mobile-limit) {
-    //     text-align: left !important;
-    //     padding-right: 0 !important;
-    //     width: 100% !important;
-    //     top: 35px !important;
-    // }
+
+    @media (max-width: $mobile-limit) {
+        top: -5em;
+    }
 }
 
 // Bouton "Portail agent" décalé en bas à droite
@@ -82,19 +75,18 @@ div.to-the-right {
 #logo-demarches {
     margin-top: 20px !important;
     img {
-        // display: block;
-        // margin-bottom: 5px;
-        // max-width: 100%;
         height: 3em;
     }
-    // @media (max-width: $mobile-limit) {
-    //     padding-left: 0 !important;
-    //     background-position: 0 !important;
-    //     padding-top: 20px !important;
-    // }
+    @media (max-width: $mobile-limit) {
+        padding-left: 0 !important;
+    }
 }
 
 // Portail usager
+
+html {
+    font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
 
 #content {
 
@@ -104,6 +96,10 @@ div.to-the-right {
 
     div.cell a, a.button, a.form-title, div.back-home-button a {
         text-decoration: none;
+    }
+
+    div.cell a:hover, a.button:hover, a.form-title:hover, div.back-home-button a:hover {
+        text-decoration: underline;
     }
 
     #sidebar {
@@ -138,7 +134,7 @@ div.to-the-right {
         .wcs-tracking-code-input h2:first-of-type, h3:first-of-type {
             background-color: $grey-color !important;
             font-family: 'Blogger Sans', sans-serif !important;
-            border-bottom: dotted 2px #000 !important;
+            border-bottom: 1px solid #ccc !important;
             font-size: 28px !important;
         }
 
@@ -228,7 +224,6 @@ div.error {
         font-family: 'Blogger Sans' !important;
         font-size: 28px !important;
         border-bottom: 0 !important;
-        //border: 2px solid $green-color !important;
         border-bottom: 2px solid $green-color !important;
         background-size: 30px !important;
         background-repeat: no-repeat !important;
@@ -297,7 +292,7 @@ div.buttons.submit {
             font-weight: normal;
             margin: 7px;
             padding-bottom: 10px;
-            border-bottom: 2px dotted black;
+            border-bottom: 1px solid #ccc;
         }
     }
     
@@ -398,6 +393,12 @@ ul#id_title {
     list-style: none;
 }
 
+#registration-blocks h2 {
+    font-size: 1.4rem;
+    font-family: "Blogger Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-bottom: 1px solid #ccc;
+}
+
 // -----------------------------------------------------
 //                 CORPS DE LA PAGE
 // -----------------------------------------------------
@@ -407,6 +408,18 @@ ul#id_title {
         width: 100% !important;
     }
 }
+
+// Champs input
+// Style CSS désactivé, car imppossible de recoder les styles des cases à cocher et boutons radio
+// dans le socle Publik, car les champs n'ont pas de balise 'label', or le design system en a besoin :
+// "Pour des questions de design, les cases à cocher et boutons radios ont été refaits via CSS. 
+// Ce qui impose une façon de coder : les inputs checkbox ou radio doivent obligatoirement être 
+// codés à gauche du label dans le HTML, sans aucune balise entre les deux."
+// cf https://design.loire-atlantique.fr/components/form.html
+// input, textarea,  {
+//     border: 1px solid $dark-grey-color;
+//     border-radius: 3px;
+// }
 
 #rub_service {
     p, label, input {
@@ -418,6 +431,10 @@ ul#id_title {
 
     div.rouge label.field--label {
         color: red;
+    }
+
+    div.file-upload-widget div.file-button div.widget-message.upload-done::after {
+        color: green;
     }
 
 }
@@ -449,10 +466,6 @@ ul#evolutions li:after {
 
 ul#evolutions div.evolution-metadata {
 	text-transform: uppercase;
-	color: #384981;
-	span.status {
-		font-weight: normal;
-	}
 }
 
 #evolutions .msg-system {
@@ -470,6 +483,10 @@ ul#evolutions span.user {
 }
 
 // Etapes
+
+.wcs-step {
+    margin-bottom: 0;
+}
 
 .wcs-step.current {
     background-color: $green-color;
@@ -558,7 +575,7 @@ div#rub_service {
         padding: 0 0 0.5ex 0;
         margin-bottom: 20px;
         background: none;
-        border-bottom: 2px dotted black;
+        border-bottom: 1px solid #ccc;
         border-top: 0;
     }
 
@@ -587,7 +604,7 @@ div#rub_service {
     font-size: 20px;
     padding-top: 1.5rem;
     margin-top: 1.5rem;
-    border-top: dotted 2px black !important;
+    border-top: 1px solid #ccc !important;
 }
 
 #rub_service form h3:first-of-type {
@@ -708,10 +725,12 @@ footer {
     font-family: $font-family;
     font-size: 12px;
     background: #e6e6e6;
+    margin-top: 2ex;
 
     // par défaut le wrapper une couleur de fond gris sombre
     #footer-wrapper {
         background: none;
+        //padding: 0;
     }
 
     // Liens
@@ -720,6 +739,9 @@ footer {
     #logo-loire-atlantique {
         text-align: right;
         padding-right: 0;
+        @media (max-width: $mobile-limit) {
+            padding: 3ex 3ex 0 0 !important;
+        }
     }
 
     ul {
