@@ -186,7 +186,7 @@ html, button {
 }
 
 h1.maintitle, h1.form-content--title {
-    font-family: 'Blogger Sans', sans-serif;
+    font-family: 'Blogger Sans', sans-serif !important;
     font-size: 35px;
     border-bottom: solid 1px #ccc !important;
 }
@@ -227,7 +227,7 @@ div.error {
 .demarches-brouillon, .demarches-encours, .demarches-terminees {
     border: solid 2px $green-color !important;
     h2 {
-        font-family: 'Blogger Sans' !important;
+        font-family: 'Blogger Sans', sans-serif !important;
         font-size: 28px !important;
         border-bottom: 0 !important;
         border-bottom: 2px solid $green-color !important;
@@ -293,7 +293,7 @@ div.buttons.submit {
         img { height: 30px; }
         h1 {
             display: block;
-            font-family: 'Blogger Sans', sans-serif;
+            font-family: 'Blogger Sans', sans-serif !important;
             font-size: 32px;
             font-weight: normal;
             margin: 7px;
