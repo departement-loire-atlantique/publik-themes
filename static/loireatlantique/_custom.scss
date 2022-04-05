@@ -84,7 +84,7 @@ div.to-the-right {
 
 // Portail usager
 
-html {
+html, button {
     font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
@@ -342,6 +342,10 @@ div.buttons.submit {
         }
     }
 
+    button.submit-button:hover {
+        text-decoration: underline !important;
+    }
+
     button.cancel-button {
         display: none;
     }
@@ -358,6 +362,10 @@ div.buttons.submit {
                 cursor: pointer;
                 border: 1px solid transparent;
                 box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.21);
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
             }
         }
 
