@@ -21,8 +21,8 @@ def data_uri(sourcepath):
     filesize = os.stat(filename).st_size
     if filesize > 10000:
         continue
-    filecontent = open(filename).read()
-    b64 = base64.encodestring(filecontent).replace('\n', '')
+    filecontent = open(filename, "rb").read()
+    b64 = base64.b64encode(filecontent)
     data_uris.append('$data_uri_%(varname)s: "data:%(mimetype)s;base64,%(b64)s";' % locals())
   os.chdir(path)
   return data_uris
