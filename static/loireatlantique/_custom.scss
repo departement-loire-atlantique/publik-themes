@@ -54,7 +54,7 @@ a:hover {
 // Bouton "Portail agent" décalé en bas à droite
 a#publik-portal-agent {
     color: black;
-    background: $green-color;
+    background: $ds44-LA;
     border: 1px solid grey;
     top: 33px;
 }
@@ -119,7 +119,7 @@ html, button {
     }
 
     #panneau-code-suivi {
-        background-color: $grey-color !important;
+        background-color: $ds44-lightgray !important;
     }
 
     #panneau-code-suivi, #tracking-code {
@@ -141,7 +141,7 @@ html, button {
         }
     
         .wcs-tracking-code-input h2:first-of-type, h3:first-of-type {
-            background-color: $grey-color !important;
+            background-color: $ds44-lightgray !important;
             font-family: 'Blogger Sans', sans-serif !important;
             border-bottom: 1px solid #ccc !important;
             font-size: 28px !important;
@@ -200,10 +200,10 @@ div.error {
 }
 
 .demarches-brouillon, .demarches-encours, .demarches-terminees {
-    border: solid 2px $green-color !important;
+    border: solid 2px $ds44-LA !important;
     div {
         h2 {
-            background-color: $grey-color !important;
+            background-color: $ds44-lightgray !important;
             background-position: bottom 11px left 10px !important;
         }
     }
@@ -228,12 +228,12 @@ div.error {
 }
 
 .demarches-brouillon, .demarches-encours, .demarches-terminees {
-    border: solid 2px $green-color !important;
+    border: solid 2px $ds44-LA !important;
     h2 {
         font-family: 'Blogger Sans', sans-serif !important;
         font-size: 28px !important;
         border-bottom: 0 !important;
-        border-bottom: 2px solid $green-color !important;
+        border-bottom: 2px solid $ds44-LA !important;
         background-size: 30px !important;
         background-repeat: no-repeat !important;
         background-position: bottom 19px left 10px !important;;
@@ -289,7 +289,7 @@ div.buttons.submit {
 
 #login-page {
 
-    background-color: $green-color;
+    background-color: $ds44-LA;
     
     .connexion-title {
         padding: 20px;
@@ -316,7 +316,7 @@ div.buttons.submit {
             left: 280px;
             border-radius: 50%;
             padding: 7px !important;
-            background-color: $green-color;
+            background-color: $ds44-LA;
             border: solid 1px grey;
             @media (max-width: 1000px) {
                 display: none;
@@ -325,7 +325,7 @@ div.buttons.submit {
     }
 
     div.block.connexion {
-        background-color: $green-color;
+        background-color: $ds44-LA;
         padding: 10px;
         margin: 1em !important;
         min-height: 320px;
@@ -400,7 +400,7 @@ div.buttons.submit {
     padding: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
-    border: solid 1px $green-color !important;
+    border: solid 1px $ds44-LA !important;
 }
 
 // Création d'un compte
@@ -434,7 +434,7 @@ ul#id_title {
 // codés à gauche du label dans le HTML, sans aucune balise entre les deux."
 // cf https://design.loire-atlantique.fr/components/form.html
 // input, textarea,  {
-//     border: 1px solid $dark-grey-color;
+//     border: 1px solid $ds44-gray;
 //     border-radius: 3px;
 // }
 
@@ -510,11 +510,16 @@ ul#evolutions span.user {
 }
 
 .wcs-step.current {
-    background-color: $green-color;
+    background-color: $ds44-LA;
 }
+
 
 .wcs-step.current .wcs-step--marker, .wcs-step.current .wcs-step--label {
     color: black
+}
+
+.wcs-step.step-before, .wcs-step.step-after {
+	color: $ds44-gray;
 }
 
 // Boutons
@@ -686,7 +691,7 @@ div.section.foldable span.disclose-message {
 }
 
 .infonotice, .pk-information, .pk-information.cell, #messages {
-    background-color: $green-color;
+    background-color: $ds44-LA;
 }
 
 // POUR CACHER DES ELEMENTS
