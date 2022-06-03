@@ -315,6 +315,12 @@ div.buttons.submit {
         }
     }
 
+    .block-oidc_1 {
+        width: auto !important;
+        min-height: 0 !important;
+        float: none !important;
+    }
+
     .block-password {
         border-right: dotted 1px black;
         @media (max-width: $mobile-limit) {
