@@ -1,65 +1,88 @@
-{% extends "authentic2/login.html" %}
+{% extends "authentic2/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extra-body-class %}{{ block.super }} login-page{% endblock %}
+
+{% block bodyargs %}
+{% endblock %}
+
+{% block title %}
+{% trans "Login" %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
 
 {% block content %}
+{% include "authentic2/service_info_fragment.html" %}
 
-<div id="login-page" class="methods3 clearfix">
-    
-    <div class="connexion-title">
-        <h1>Connexion aux services en ligne du Département de Loire-Atlantique</h1>
-    </div>
+{% block login-pre %}{% endblock %}
+<div id="login-page" class="clearfix methods{{ blocks|length }}">
+{% block login-top %}{% endblock %}
 
-    {# name : Nom de la méthode de connexion, soit: #}
-    {# "Mot de passe", 'OpenIDConnect" (connexion Keycloack agent) ou"FranceConnect" #}
+<div class="connexion-title">
+    <h1>Connexion aux services en ligne du Département de Loire-Atlantique</h1>
+</div>
 
-    {# Bloc Mot de passe #}
-    {% for name, content in methods %}
-        {% if name == "Mot de passe" %}
-        <div class="block connexion motdepasse">
-            {% if methods|length == 1 %}
-            <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
-            {% endif %}
-            <h3>Se connecter</h3>
-            {{ content|safe }}
-            <div class="or">ou</div>
-        </div>
+{% block login-blocks %}
+
+    {# bloc connexion gestionnaire #}
+    {% for id, login_block in blocks.items %}
+        {% if id == "oidc_1" %}
+            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+                {% if blocks|length == 1 %}
+                    <h2>Connexion</h2>
+                {% endif %}
+                    <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
+                {{ login_block.content|safe }}
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 
-    {# Bouton connexion agent #}
-    {% for name, content in methods %}
-    <div id="bouton-connexion-agent">
-        {% if methods|length == 1 %}
-        <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
-        {% endif %}
-        {% if name == "OpenIDConnect" %}
-        <div>
-            {{ content|safe }}
-        </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-
-    {# Bloc FranceConnect #}
-    {% for name, content in methods %}
-        {% if name == "FranceConnect" %}
-        <div class="block connexion franceconnect">
-            {% if methods|length == 1 %}
-            <h2>{% if forloop.counter0 %}{{name}}{% else %}Connexion{% endif %}</h2>
-            {% endif %}
-            {{ content|safe }}
-        </div>
+    {# bloc courriel + mot de passe #}
+    {% for id, login_block in blocks.items %}
+        {% if id == "password" %}
+            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+                {% if blocks|length == 1 %}
+                    <h2>Connexion</h2>
+                {% endif %}
+                    <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
+                {{ login_block.content|safe }}
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 
+    {# bloc FranceConnect #}
+    {% for id, login_block in blocks.items %}
+        {% if id == "fc" %}
+            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+                {% if blocks|length == 1 %}
+                    <h2>Connexion</h2>
+                {% endif %}
+                    <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
+                {{ login_block.content|safe }}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {# bloc Créer un compte #}
     {% block login-welcome-text %}
-    <div id="register-account" class="block connexion creercompte">
-        <h3>Créer un compte</h3>
-        <p>Vous n'avez pas encore de compte ?<br>Créer un compte vous permet de suivre plus simplement vos démarches en ligne.</p>
-        <div class="register"><a href="{{root_url}}/accounts/register/">Créer un compte</a></div>
-    </div>
+        <div id="register-account" class="block connexion creercompte">
+            <h3>Créer un compte</h3>
+            <p>Vous n'avez pas encore de compte ?<br>Créer un compte vous permet de suivre plus simplement vos démarches en ligne.</p>
+            <div class="register"><a href="{{ registration_url }}">Créer un compte</a></div>
+        </div>
     {% endblock %}
 
+{% endblock %}
+
+{% block login-bottom %}{% endblock %}
 </div>
+{% block login-post %}{% endblock %}
 
 <div id="login-page-encart">
 

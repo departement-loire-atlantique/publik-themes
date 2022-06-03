@@ -305,26 +305,7 @@ div.buttons.submit {
         }
     }
     
-    .block.connexion.motdepasse {
-        h2 {
-            display: none; // masquage du titre "Connexion" redondant
-        }
-        .or {
-            width: 30px;
-            position: relative;
-            top: -160px;
-            left: 280px;
-            border-radius: 50%;
-            padding: 7px !important;
-            background-color: $ds44-LA;
-            border: solid 1px grey;
-            @media (max-width: 1000px) {
-                display: none;
-            }
-        }
-    }
-
-    div.block.connexion {
+    .block {
         background-color: $ds44-LA;
         padding: 10px;
         margin: 1em !important;
@@ -333,18 +314,21 @@ div.buttons.submit {
             padding: 0 !important;
         }
     }
-    
-    div.block.connexion.motdepasse {
+
+    .block-password {
         border-right: dotted 1px black;
         @media (max-width: $mobile-limit) {
             border: none;
+        }
+        h2 {
+            display: none; // masquage du titre "Connexion" redondant
         }
         h3, form {
             padding-left: 20px;
         }
     }
 
-    div.block.connexion.creercompte {
+    .creercompte {
         border-left: dotted 1px black;
         @media (max-width: $mobile-limit) {
             border: none;
