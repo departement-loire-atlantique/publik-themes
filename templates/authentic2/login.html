@@ -31,9 +31,6 @@
     {% for id, login_block in blocks.items %}
         {% if id == "oidc_1" %}
             <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
-                {% if blocks|length == 1 %}
-                    <h2>Connexion</h2>
-                {% endif %}
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 </div>
@@ -45,9 +42,7 @@
     {% for id, login_block in blocks.items %}
         {% if id == "password" %}
             <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
-                {% if blocks|length == 1 %}
-                    <h2>Connexion</h2>
-                {% endif %}
+                    <h3>Se connecter</h3>
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 </div>
@@ -59,9 +54,6 @@
     {% for id, login_block in blocks.items %}
         {% if id == "fc" %}
             <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
-                {% if blocks|length == 1 %}
-                    <h2>Connexion</h2>
-                {% endif %}
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 </div>
