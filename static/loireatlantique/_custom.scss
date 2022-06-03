@@ -317,8 +317,9 @@ div.buttons.submit {
 
     .block-oidc_1 {
         width: auto !important;
-        min-height: 0 !important;
+        min-height: 0;
         float: none !important;
+        padding: 0;
     }
 
     .block-password {
