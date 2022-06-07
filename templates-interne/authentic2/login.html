@@ -1,0 +1,105 @@
+<style>
+
+    #oidc-a-keycloak-agents {
+        display: block;
+        height: 35px;
+        background-color: white;
+        color: black;
+        border: solid 1px black;
+    }
+
+    #msg-clic-bouton-connexion-agent {
+        display: block;
+        font-size: 24px;
+        font-weight: normal;
+        text-align: center
+    }
+
+    #oidc-p-keycloak-agents {
+        font-size: 1.5em;
+        width: 20rem;
+        height: 3rem;
+        padding-top: 0.35em;
+        margin-bottom: 3rem;
+    }
+
+</style>
+
+{% extends "authentic2/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extra-body-class %}{{ block.super }} login-page{% endblock %}
+
+{% block bodyargs %}
+{% endblock %}
+
+{% block title %}
+{% trans "Login" %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+{% include "authentic2/service_info_fragment.html" %}
+
+{% block login-pre %}{% endblock %}
+<div id="login-page" class="clearfix methods{{ blocks|length }}">
+{% block login-top %}{% endblock %}
+
+<div class="connexion-title">
+    <h1>Connexion aux démarches internes du Département de Loire-Atlantique</h1>
+</div>
+
+{% block login-blocks %}
+
+    {# bloc connexion agent #}
+    <p id="msg-clic-bouton-connexion-agent">Cliquez sur le bouton ci-dessous pour vous connecter</p>
+    {% for id, login_block in blocks.items %}
+        {% if id == "oidc_1" %}
+            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+                    <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
+                {{ login_block.content|safe }}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {# bloc courriel + mot de passe #}
+    {% for id, login_block in blocks.items %}
+        {% if id == "password" %}
+            <div class="block block-{{login_block.authenticator.id}} block-{{id}}" style="display: none;">
+                    <h3>Se connecter</h3>
+                    <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
+                {{ login_block.content|safe }}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block login-bottom %}{% endblock %}
+</div>
+{% block login-post %}{% endblock %}
+
+<div id="login-page-encart">
+
+    <p>Les données personnelles vous concernant sont collectées et traitées par le Département de Loire-Atlantique (3 Quai Ceineray, CS 94109, 44041 Nantes Cedex 1) dans le cadre de la mise 
+        en œuvre de sa politique de simplification des démarches. Ce traitement a pour seule finalité l’instruction de vos demandes par les services du Département en charge de ces démarches.</p>
+
+    <p>Les données personnelles demandées sont nécessaires au traitement de votre demande : celle-ci ne pourra pas être instruite en cas d’information manquante, incomplète, illisible ou erronée.</p>
+
+    <p>Vous pouvez accéder aux données vous concernant et demander leur rectification ou leur effacement.
+    <br>Vous disposez également d'un droit d’opposition ou de limitation du traitement de vos données.</p>
+
+    <p>Pour exercer ces droits ou pour toute question relative au traitement de vos données dans ce dispositif, vous pouvez contacter notre délégué à la protection des données à l’adresse suivante : Département de Loire-Atlantique, Délégué à la protection des données, Direction juridique, 3 quai ceineray, CS 94109, 44041 Nantes Cedex 1.</p>
+
+</div>
+
+<script>
+    $("#oidc-a-keycloak-agents").addClass("button");
+</script>
+
+{% endblock %}
