@@ -32,6 +32,10 @@ install: css
         rm $(DESTDIR)$(prefix)/share/publik/themes/publik-base/themes.json ; \
         cp themes.json $(DESTDIR)$(prefix)/share/publik/themes/publik-base/themes.json	
 
+install_interne: install
+	cp -R static-interne/loireatlantique $(DESTDIR)$(prefix)/share/publik/themes/publik-base/static/ 
+	cp -R templates-interne/* $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants/loireatlantique/ 
+
 version:
 	@(echo $(VERSION))
 
