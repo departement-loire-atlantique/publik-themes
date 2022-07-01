@@ -30,8 +30,7 @@ $muli_path: 'fonts/Muli/';
 @mixin muli-font($type, $weight, $style: normal) {
 	@font-face {
 		font-family: 'Muli';
-		src: url('#{$muli_path}muli-#{$type}-webfont.woff2') format('woff2'),
-		     url('#{$muli_path}muli-#{$type}-webfont.woff') format('woff');
+		src: url('#{$muli_path}muli-#{$type}-webfont.woff2') format('woff2');
 		font-weight: $weight;
 		font-style: $style;
 	}
@@ -39,16 +38,11 @@ $muli_path: 'fonts/Muli/';
 
 @mixin muli-font-pair($type, $weight) {
 	@include muli-font($type, $weight);
-	@include muli-font(#{$type}italic, $weight, italic);
 }
 
-@include muli-font-pair('extralight', 200);
-@include muli-font-pair('light', 300);
 @include muli-font-pair('regular', 400);
-@include muli-font-pair('semibold', 600);
+@include muli-font-pair('italic', 400);
 @include muli-font-pair('bold', 700);
-@include muli-font-pair('extrabold', 800);
-@include muli-font-pair('black', 900);
 
 
 // Blogger Sans
