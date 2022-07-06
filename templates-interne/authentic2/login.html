@@ -57,6 +57,11 @@
         {% endif %}
     {% endfor %}
 
+
+<code style="display: none;">
+{{ blocks.items }}
+</code> 
+
     {# bloc courriel + mot de passe #}
     {% for id, login_block in blocks.items %}
         {% if id == "password" %}
