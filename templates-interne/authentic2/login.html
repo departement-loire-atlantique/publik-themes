@@ -46,12 +46,15 @@
 {% block login-blocks %}
 
     {# bloc connexion agent #}
-    <p id="msg-clic-bouton-connexion-agent">Cliquez sur le bouton ci-dessous pour vous connecter</p>
+    <p id="msg-clic-bouton-connexion-agent">Cliquez sur le bouton ci-dessous vous concernant pour vous connecter</p>
     {% for id, login_block in blocks.items %}
         {% if "oidc_" in id %}
             <div class="block block-{{login_block.authenticator.id}} block-oidc">
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
+                <p>
+                    <a class="button" id="connexion-pc-securite" title="Connexion par login et mot de passe" href="#" onclick="show_block_password();return false;">Connexion PC sécurité</a>
+                </p>
                 </div>
             </div>
         {% endif %}
@@ -60,7 +63,7 @@
     {# bloc courriel + mot de passe #}
     {% for id, login_block in blocks.items %}
         {% if id == "password" %}
-            <div class="block block-{{login_block.authenticator.id}} block-{{id}}" style="display: none;">
+            <div id="block-password" class="block block-{{login_block.authenticator.id}} block-{{id}}" style="display: none;">
                     <h3>Se connecter</h3>
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
@@ -91,6 +94,15 @@
 
 <script>
     $("#oidc-a-keycloak-agents").addClass("button");
+
+    function show_block_password() {
+        var elm = document.getElementById("block-password");
+        if (elm.style.display === "none") {
+            elm.style.display = "block";
+        } else {
+            elm.style.display = "none";
+        }
+    }
 </script>
 
 {% endblock %}
