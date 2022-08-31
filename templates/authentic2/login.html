@@ -27,10 +27,10 @@
 
 {% block login-blocks %}
 
-    {# bloc connexion gestionnaire #}
+    {# bloc connexion agent #}
     {% for id, login_block in blocks.items %}
-        {% if "oidc_" in id %}
-            <div class="block block-{{login_block.authenticator.id}} block-oidc">
+    {% if login_block.authenticator.type == "oidc" %}
+            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}">
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 </div>
@@ -40,8 +40,8 @@
 
     {# bloc courriel + mot de passe #}
     {% for id, login_block in blocks.items %}
-        {% if id == "password" %}
-            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+    {% if login_block.authenticator.type == "password" %}
+            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}">
                     <h3>Se connecter</h3>
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
@@ -52,8 +52,8 @@
 
     {# bloc FranceConnect #}
     {% for id, login_block in blocks.items %}
-        {% if id == "fc" %}
-            <div class="block block-{{login_block.authenticator.id}} block-{{id}}">
+    {% if login_block.authenticator.type == "fc" %}
+            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}">
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 </div>

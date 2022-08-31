@@ -48,8 +48,8 @@
     {# bloc connexion agent #}
     <p id="msg-clic-bouton-connexion-agent">Cliquez sur le bouton ci-dessous vous concernant pour vous connecter</p>
     {% for id, login_block in blocks.items %}
-        {% if "oidc_" in id %}
-            <div class="block block-{{login_block.authenticator.id}} block-oidc">
+        {% if login_block.authenticator.type == "oidc" %}
+            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}">
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
                 <p>
@@ -62,8 +62,8 @@
 
     {# bloc courriel + mot de passe #}
     {% for id, login_block in blocks.items %}
-        {% if id == "password" %}
-            <div id="block-password" class="block block-{{login_block.authenticator.id}} block-{{id}}" style="display: none;">
+        {% if login_block.authenticator.type == "password" %}
+            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}" style="display: none;">
                     <h3>Se connecter</h3>
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
