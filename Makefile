@@ -1,6 +1,8 @@
 NAME := la-publik-themes
 
-prefix = /usr
+prefix = /usr/share/publik/themes/publik-base
+# prefix for devinst
+#prefix = /usr/local/share/publik-devinst/themes/publik-base
 
 all: css
 
@@ -14,27 +16,27 @@ css: data_uris
 
 clean:
 	rm -f publik-base-theme/static/includes/_data_uris.scss ; \
-        rm -rf $(DESTDIR)$(prefix)/share/publik/themes/publik-base/static/loireatlantique ; \
-        rm -rf $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants/loireatlantique
+        rm -rf $(DESTDIR)$(prefix)/static/loireatlantique ; \
+        rm -rf $(DESTDIR)$(prefix)/templates/variants/loireatlantique
         
 install: css
 	# Create a link for static files (js, css, images, ...) into the public base theme directory
-	test -d $(DESTDIR)$(prefix)/share/publik/themes/publik-base/static
-	cp -R static/loireatlantique $(DESTDIR)$(prefix)/share/publik/themes/publik-base/static/ 	
+	test -d $(DESTDIR)$(prefix)/static
+	cp -R static/loireatlantique $(DESTDIR)$(prefix)/static/ 	
 
 	# Create a link for custom templates into the public base theme directory
-	test -d $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants
-	mkdir -p $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants/loireatlantique
-	cp -R templates/* $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants/loireatlantique/ 
+	test -d $(DESTDIR)$(prefix)/templates/variants
+	mkdir -p $(DESTDIR)$(prefix)/templates/variants/loireatlantique
+	cp -R templates/* $(DESTDIR)$(prefix)/templates/variants/loireatlantique/ 
 
 	# Keep only publik and loireatlantique themes (delete link to other themes) 
-	test -d $(DESTDIR)$(prefix)/share/publik/themes/publik-base/themes.json ; \
-        rm $(DESTDIR)$(prefix)/share/publik/themes/publik-base/themes.json ; \
-        cp themes.json $(DESTDIR)$(prefix)/share/publik/themes/publik-base/themes.json	
+	test -d $(DESTDIR)$(prefix)/themes.json ; \
+        rm $(DESTDIR)$(prefix)/themes.json ; \
+        cp themes.json $(DESTDIR)$(prefix)/themes.json	
 
 install_interne: install
-	cp -R static-interne/loireatlantique $(DESTDIR)$(prefix)/share/publik/themes/publik-base/static/ 
-	cp -R templates-interne/* $(DESTDIR)$(prefix)/share/publik/themes/publik-base/templates/variants/loireatlantique/ 
+	cp -R static-interne/loireatlantique $(DESTDIR)$(prefix)/static/ 
+	cp -R templates-interne/* $(DESTDIR)$(prefix)/templates/variants/loireatlantique/ 
 
 version:
 	@(echo $(VERSION))
