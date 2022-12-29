@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 $primary-color: #99E6D1; 
+$gray-light: #888888;
+$gray-dark: #555555;
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 //$font-family: "Muli", sans-serif;
 $font-size: 13px;
@@ -14,6 +16,9 @@ $button-color: white;
 $buttons-order: previous, cancel, submit (grow);
 $border-radius: 0;
 $cell-border: 0;
+
+$widget-border: 1px solid $gray-light;
+$widget-focus-border: 1px solid $gray-dark;
 
 $ds44-LA: #99E6D1;
 $ds44-gray: #5C5C5C;
