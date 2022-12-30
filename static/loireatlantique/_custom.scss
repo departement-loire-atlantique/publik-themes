@@ -426,7 +426,7 @@ ul#id_title {
 // codés à gauche du label dans le HTML, sans aucune balise entre les deux."
 // cf https://design.loire-atlantique.fr/components/form.html
 // input, textarea,  {
-//     border: 1px solid $ds44-gray;
+//     border: 1px solid $gray-dark;
 //     border-radius: 3px;
 // }
 
@@ -499,19 +499,19 @@ ul#evolutions span.user {
 
 .wcs-step {
     margin-bottom: 0;
+    border-bottom: 1px solid $gray-dark;
 }
 
 .wcs-step.current {
     background-color: $ds44-LA;
 }
 
-
 .wcs-step.current .wcs-step--marker, .wcs-step.current .wcs-step--label {
     color: black
 }
 
-.wcs-step.step-before, .wcs-step.step-after {
-	color: $ds44-gray;
+.wcs-step.step-before, .wcs-step.step-after, .wcs-step--marker {
+	color: black;
 }
 
 // Boutons
