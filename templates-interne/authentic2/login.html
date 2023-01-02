@@ -63,7 +63,7 @@
     {# bloc courriel + mot de passe #}
     {% for id, login_block in blocks.items %}
         {% if login_block.authenticator.type == "password" %}
-            <div class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}" style="display: none;">
+            <div id="block-password-id" class="block block-{{login_block.authenticator.type}} block-{{login_block.authenticator.id}}" style="display: none;">
                     <h3>Se connecter</h3>
                     <div {% if login_block.extra_css_class %} class="{{ login_block.extra_css_class }}"{% endif %}>
                 {{ login_block.content|safe }}
@@ -96,7 +96,7 @@
     $("#oidc-a-keycloak-agents").addClass("button");
 
     function show_block_password() {
-        var elm = document.getElementById("block-password");
+        var elm = document.getElementById("block-password-id");
         if (elm.style.display === "none") {
             elm.style.display = "block";
         } else {
